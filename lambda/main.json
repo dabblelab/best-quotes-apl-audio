@@ -1,0 +1,217 @@
+{
+    "type": "APLA",
+    "version": "1.0",
+    "theme": "dark",
+    "import": [
+        {
+            "name": "alexa-layouts",
+            "version": "1.0.0"
+        }
+    ],
+    "resources": [
+        {
+            "description": "Stock color for the light theme",
+            "colors": {
+                "colorTextPrimary": "#151920"
+            }
+        },
+        {
+            "description": "Stock color for the dark theme",
+            "when": "${viewport.theme == 'dark'}",
+            "colors": {
+                "colorTextPrimary": "#f0f1ef"
+            }
+        },
+        {
+            "description": "Standard font sizes",
+            "dimensions": {
+                "textSizeBody": 30,
+                "textSizePrimary": 27,
+                "textSizeSecondary": 23,
+                "textSizeSecondaryHint": 25
+            }
+        },
+        {
+            "description": "Common spacing values",
+            "dimensions": {
+                "spacingThin": 6,
+                "spacingSmall": 12,
+                "spacingMedium": 24,
+                "spacingLarge": 48,
+                "spacingExtraLarge": 72
+            }
+        },
+        {
+            "description": "Common margins and padding",
+            "dimensions": {
+                "marginTop": 40,
+                "marginLeft": 60,
+                "marginRight": 60,
+                "marginBottom": 40
+            }
+        }
+    ],
+    "styles": {
+        "textStyleBase": {
+            "description": "Base font description; set color",
+            "values": [
+                {
+                    "color": "@colorTextPrimary"
+                }
+            ]
+        },
+        "textStyleBase0": {
+            "description": "Thin version of basic font",
+            "extend": "textStyleBase",
+            "values": {
+                "fontWeight": "100"
+            }
+        },
+        "textStyleBase1": {
+            "description": "Light version of basic font",
+            "extend": "textStyleBase",
+            "values": {
+                "fontWeight": "300"
+            }
+        },
+        "mixinBody": {
+            "values": {
+                "fontSize": "@textSizeBody"
+            }
+        },
+        "mixinPrimary": {
+            "values": {
+                "fontSize": "@textSizePrimary"
+            }
+        },
+        "mixinSecondary": {
+            "values": {
+                "fontSize": "@textSizeSecondary"
+            }
+        },
+        "textStylePrimary": {
+            "extend": [
+                "textStyleBase1",
+                "mixinPrimary"
+            ]
+        },
+        "textStyleSecondary": {
+            "extend": [
+                "textStyleBase0",
+                "mixinSecondary"
+            ]
+        },
+        "textStyleBody": {
+            "extend": [
+                "textStyleBase1",
+                "mixinBody"
+            ]
+        },
+        "textStyleSecondaryHint": {
+            "values": {
+                "fontFamily": "Bookerly",
+                "fontStyle": "italic",
+                "fontSize": "@textSizeSecondaryHint",
+                "color": "@colorTextPrimary"
+            }
+        }
+    },
+    "layouts": {},
+    "mainTemplate": {
+        "description": "********* Full-screen background image **********",
+        "parameters": [
+            "payload"
+        ],
+        "items": [
+            {
+                "when": "${viewport.shape == 'round'}",
+                "type": "Container",
+                "direction": "column",
+                "items": [
+                    {
+                        "type": "Image",
+                        "source": "${payload.response.url}",
+                        "position": "absolute",
+                        "width": "100vw",
+                        "height": "100vh",
+                        "scale": "best-fill"
+                    },
+                    {
+                        "type": "AlexaHeader",
+                        "headerTitle": "${payload.response.title}",
+                        "headerSubtitle": "${payload.response.subtitle}",
+                        "headerAttributionImage": "${payload.response.logo}"
+                    },
+                    {
+                        "type": "Container",
+                        "grow": 1,
+                        "paddingLeft": "@marginLeft",
+                        "paddingRight": "@marginRight",
+                        "paddingBottom": "@marginBottom",
+                        "items": [
+                            {
+                                "type": "Text",
+                                "text": "${payload.response.text}",
+                                "fontSize": "20",
+                                "spacing": "10",
+                                "style": "textStyleBody"
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "type": "Container",
+                "height": "100vh",
+                "items": [
+                    {
+                        "type": "Image",
+                        "source": "${payload.response.url}",
+                        "position": "absolute",
+                        "width": "100vw",
+                        "height": "100vh",
+                        "scale": "best-fill"
+                    },
+                    {
+                        "type": "AlexaHeader",
+                        "headerTitle": "${payload.response.title}",
+                        "headerSubtitle": "${payload.response.subtitle}",
+                        "headerAttributionImage": "${payload.response.logo}"
+                    },
+                    
+                   {
+                        "type": "Container",
+                        "width": "1000dp",
+                        "height": "400dp",
+                        "paddingTop": "52dp",
+                        "paddingLeft": "16dp",
+                        "paddingRight": "16dp",
+                        "paddingBottom": "52dp",
+                        "justifyContent": "center",
+                        "position": "relative",
+                        "alignItems": "center",
+                        "items": [
+                            {
+                                "type": "Text",
+                                "width": "500dp",
+                                "height": "200dp",
+                                "paddingTop": "12dp",
+                                "paddingBottom": "12dp",
+                                "alignSelf": "center",
+                                "text": "${payload.response.text}",
+                                "fontSize": "30dp",
+                                "textAlign": "center",
+                                "fontStyle": "normal",
+                                "fontWeight": "bold",
+                                "fontFamily": "raleway"
+                            }
+                        ],
+                        "alignSelf": "center",
+                        "bottom": "10",
+                        "top": "50"
+                    }
+                ]
+            }
+        ]
+    }
+}
